@@ -2,11 +2,19 @@
 (function(){
 //bank of words that player will try to guess
 let wordBank = ["modest mouse", "duster", "american football", "sebadoh", "the flaming lips", "galaxie 500", "pavement", "built to spill",
-                "digibal planets", "outkast", "wu tang clan", "aphex twin", "bjork", "boards of canada", "slowdive", "my bloody valentine",
+                "digible planets", "outkast", "wu tang clan", "aphex twin", "bjork", "boards of canada", "slowdive", "my bloody valentine",
                 "flake music", "guided by voices", "dj shadow", "pj harvey", "weezer", "radiohead", "yo la tengo", "nirvana", "stereolab",
                 "pinback", "at the drive in", "they might be giants", "disco inferno", "polvo", "slint", "capn jazz", "elliott smith",
                 "the american analog set", "red hot chili peppers"];
-//associate list of letters and ASCII numbers
+let fileName = {"modest mouse":"this-is-a-long-drive.jpg", "duster": "stratosphere-cover.jpg", "american football":"american-football.jpg",
+                "sebadoh":"sebadoh-iii.jpg", "the flaming lips":"soft-bulletin.jpg", "galaxie 500":"on-fire.jpg", "pavement":"slanted-and-enchanted.jpg", 
+                "built to spill":"keep-it-like-a-secret.jpg", "digible planets":"reachin.jpg", "outkast":"atliens.jpeg", "wu tang clan":"enter-the-wu-tang.jpg", 
+                "aphex twin":"richard-d-james.jpg", "bjork":"post.jpg", "boards of canada":"twoism.jpg", "slowdive":"souvlaki.jpg", "my bloody valentine":"loveless.jpg",
+                "flake music":"when-you-land.jpg", "guided by voices":"bee-thousand.png", "dj shadow":"endtroducing.jpg", "pj harvey":"rid-of-me.jpg", "weezer":"blue-album.jpg",
+                "radiohead":"ok-computer.jpg", "yo la tengo":"i-can-hear.jpg", "nirvana":"in-utero.jpg", "stereolab":"dots-and-loops.jpg", "pinback":"pinback.jpg",
+                "at the drive in":"relationship-of-command.jpg", "they might be giants":"lincoln.jpg", "disco inferno":"disco-inferno.jpg", "polvo":"exploded-drawing.jpg",
+                "slint":"spiderland.jpg", "capn jazz":"capn-jazz.jpg", "elliott smith":"either-or.jpg", "the american analog set":"know-by-heart.jpg", "red hot chili peppers":"blood-sugar-sex-magic.jpg"};
+                //associate list of letters and ASCII numbers
 let letters = { 0:48, 1:49, 2:50, 3:51, 4:52, 5:53, 6:54, 7:55, 8:56, 9:57, a:65, b:66, c:67, d:68, e:69, f:70, g:71, h:72,
                 i:73, j:74, k:75, l:76, m:77, n:78, o:79, p:80, q:81, r:82, s:83, t:84, u:85, v:86, w:87, x:88, y:89, z:90}
 //used to check if the initial screen has been set up 
@@ -74,13 +82,20 @@ const makeGuess = (gWord, guess, output) => {
     }
 }
 
-const set = (gword) => {
+const set = (gWord) => {
     let underscores = "";
+    let source = "assets/images/";
     for(let i = 0; i < gWord.length; i++){
         if(gWord.charAt(i) === " "){underscores += "-- ";}
         else{underscores += "_ ";}
     }
-
+    for(key in fileName){
+        console.log("key: " + key);
+        console.log("gWord: " + gWord);
+        console.log("source: " + fileName[key]);
+        if(key === gWord){source += fileName[key];}
+    }
+    document.querySelector(".album").innerHTML = "<img class = \"album-art\" src = \"" + source + "\" >";
     document.querySelector(".wins-guesses").innerHTML = "Wins: " + wins + ", Guesses Remaining: " + guessRemaining;
     document.querySelector(".used-words").innerHTML = "";  
     document.querySelector(".instructions").innerHTML = "";   
