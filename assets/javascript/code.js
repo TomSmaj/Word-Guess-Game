@@ -1,9 +1,6 @@
 
 (function(){
 
-                
-
-
 let artist = [
     {name:"modest mouse", pic:"this-is-a-long-drive.jpg"},
     {name:"duster", pic:"stratosphere-cover.jpg"},
@@ -73,7 +70,7 @@ document.addEventListener("keyup", function(event){
         output = set(gWord);
     }
     else if(setup){
-        guess = getLetter(event.which);
+        guess = event.key;
         //find where guess is in gWord
         if(!usedWords.includes(guess) && guess != " "){
             makeGuess(gWord, guess, output);
@@ -125,21 +122,19 @@ const set = (gWord) => {
     while(!found){
         if(artist[j].name === gWord){
             source += artist[j].pic;
+            document.querySelector(".album").innerHTML = "<img class = \"album-art\" src = \"" + source + "\" >";
+            artist.splice(j, 1);
             found = true;
         }
         else{j++;}
     }
+
     
-    document.querySelector(".album").innerHTML = "<img class = \"album-art\" src = \"" + source + "\" >";
     document.querySelector(".wins-guesses").innerHTML = "Wins: " + wins + ", Guesses Remaining: " + guessRemaining;
     document.querySelector(".used-words").innerHTML = "";  
     document.querySelector(".instructions").innerHTML = "";   
 
     setup = true; 
-
-    //after the guess word has been selected, and the album cover has been printed to the screen,
-    //the object containing the name and pic can be removed so it is not selected again
-    artist.splice(artist.indexOf(gWord), 1);
 
     underscores = underscores.split(" ");
     drawWord(underscores); 
@@ -153,15 +148,6 @@ const genLetters = (word) => {
         if(!(l.includes(arr[i])) && arr[i] !== " "){l += arr[i];}
     }
     return l;
-}
-
-const getLetter = (which) => {
-    if(which === 32){return " ";}
-    for( key in letters ){
-        if(letters[key] === which){return key;}
-    }
-    console.log("Not found");
-    return "#";
 }
 
 const revealWord = (gWord) => {
