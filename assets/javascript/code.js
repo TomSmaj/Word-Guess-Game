@@ -54,7 +54,7 @@ let gWord = "";
 //will store each guess the user makes
 let guess = "";
 let output = "";
-let guessRemaining = 8, wins = 0;
+let guessRemaining = 8, wins = 0, losses = 0;
 let usedWords = "";
 let lettersInWord = "";
 
@@ -83,8 +83,8 @@ document.addEventListener("keyup", function(event){
                 endGame();
             }
         }
-        else if(usedWords.includes(guess)){document.querySelector(".instructions").innerHTML = "You have already guessed that letter.";}
-        else{document.querySelector(".instructions").innerHTML = "You have entered an unacceptable character.";}
+        else if(usedWords.includes(guess)){document.querySelector(".instructions").innerHTML = "You have already guessed that letter";}
+        else{document.querySelector(".instructions").innerHTML = "You have entered an unacceptable character";}
     }
 
 })    
@@ -93,9 +93,9 @@ const makeGuess = (gWord, guess, output) => {
     usedWords += guess;
     if(!(gWord.includes(guess))){
         guessRemaining--;
-        document.querySelector(".instructions").innerHTML = "The band name does not contain: " + guess;
+        document.querySelector(".instructions").innerHTML = "The artist name does not contain: " + guess;
         outputUsedWords(usedWords);
-        document.querySelector(".wins-guesses").innerHTML = "Wins: " + wins + ", Guesses Remaining: " + guessRemaining;
+        document.querySelector(".wins-guesses").innerHTML = "Wins: " + wins + ", Losses: " + losses + ", Guesses Remaining: " + guessRemaining;
         return;
     }
     else{
@@ -123,6 +123,7 @@ const set = (gWord) => {
         if(artist[j].name === gWord){
             source += artist[j].pic;
             document.querySelector(".album").innerHTML = "<img class = \"album-art\" src = \"" + source + "\" >";
+            document.querySelector("body").style.backgroundImage = "url(" + source + ")";
             artist.splice(j, 1);
             found = true;
         }
@@ -130,7 +131,7 @@ const set = (gWord) => {
     }
 
     
-    document.querySelector(".wins-guesses").innerHTML = "Wins: " + wins + ", Guesses Remaining: " + guessRemaining;
+    document.querySelector(".wins-guesses").innerHTML = "Wins: " + wins + ", Losses: " + losses + ", Guesses Remaining: " + guessRemaining;
     document.querySelector(".used-words").innerHTML = "";  
     document.querySelector(".instructions").innerHTML = "";   
 
@@ -162,11 +163,13 @@ const revealWord = (gWord) => {
 const endGame = () => {
     if(correct){
         wins += 1;
-        document.querySelector(".wins-guesses").innerHTML = "Wins: " + wins + ", Guesses Remaining: " + guessRemaining;
-        document.querySelector(".instructions").innerHTML = "Correct! Press any key to keep playing.";  
+        document.querySelector(".wins-guesses").innerHTML = "Wins: " + wins + ", Losses: " + losses + ", Guesses Remaining: " + guessRemaining;
+        document.querySelector(".instructions").innerHTML = "Correct! Press any key to keep playing";  
     }
     else{
-        document.querySelector(".instructions").innerHTML = "Bummer, you lost :( ... Press any key to keep playing.";  
+        losses += 1;
+        document.querySelector(".wins-guesses").innerHTML = "Wins: " + wins + ", Losses: " + losses + ", Guesses Remaining: " + guessRemaining;
+        document.querySelector(".instructions").innerHTML = "Bummer, you lost :( ... Press any key to keep playing";  
     }
     setup = false;
     guessRemaining = 8;
@@ -203,10 +206,11 @@ const chooseWord = () => {
 }
 
 const killScreen = () => {
-    document.querySelector(".wins-guesses").innerHTML = "Wins: " + wins; 
-    document.querySelector(".unknown-word").innerHTML = "Wowee"; 
-    document.querySelector(".instructions").innerHTML = "There are no more bands to guess!";   
-    document.querySelector(".used-words").innerHTML = "You win!"; 
+    document.querySelector(".wins-guesses").innerHTML = "";
+    document.querySelector(".album").innerHTML = "";
+    document.querySelector(".unknown-word").innerHTML = "There are no more bands to guess";   
+    document.querySelector(".instructions").innerHTML = "Final Score:"
+    document.querySelector(".used-words").innerHTML = "Wins: " + wins + ", Losses: " + losses;
 
 }
 
