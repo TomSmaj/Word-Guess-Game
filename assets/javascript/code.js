@@ -3,12 +3,12 @@
 
 let artist = [
     {name:"modest mouse", pic:"this-is-a-long-drive.jpg"},
-    {name:"duster", pic:"stratosphere-cover.jpg"},
+    {name:"duster", pic:"Stratosphere-cover.jpg"},
     {name:"american football", pic:"american-football.jpg"},
     {name:"sebadoh", pic:"sebadoh-iii.jpg"},
     {name:"the flaming lips", pic:"soft-bulletin.jpg"},
     {name:"galaxie 500", pic:"on-fire.jpg"},
-    {name:"pavement", pic:"slanted-and-enchanted.jpg"}, 
+    {name:"pavement", pic:"wowee-zowee.jpg"}, 
     {name:"built to spill", pic:"keep-it-like-a-secret.jpg"},
     {name:"digible planets", pic:"reachin.jpg"},
     {name:"outkast", pic:"atliens.jpeg"},
@@ -19,7 +19,6 @@ let artist = [
     {name:"slowdive", pic:"souvlaki.jpg"},
     {name:"my bloody valentine", pic:"loveless.jpg"},
     {name:"flake music", pic:"when-you-land.jpg"},
-    {name:"guided by voices", pic:"bee-thousand.png"},
     {name:"dj shadow", pic:"endtroducing.jpg"},
     {name:"pj harvey", pic:"rid-of-me.jpg"},
     {name:"weezer", pic:"blue-album.jpg"},
