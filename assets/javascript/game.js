@@ -39,11 +39,8 @@ let artist = [
     {name:"cocteau twins", pic:"heaven-or-las-vegas.png"}
 ];
 
-
-//associate list of letters and ASCII numbers
-//use event.key to avoid havving to use ASCII code
-let letters = { 0:48, 1:49, 2:50, 3:51, 4:52, 5:53, 6:54, 7:55, 8:56, 9:57, a:65, b:66, c:67, d:68, e:69, f:70, g:71, h:72,
-                i:73, j:74, k:75, l:76, m:77, n:78, o:79, p:80, q:81, r:82, s:83, t:84, u:85, v:86, w:87, x:88, y:89, z:90}
+//letters and numbers allowed to be entered as a guess
+letters = "abcdefghijklmnopqrstuvwxyz01234567890";
 //used to check if the initial screen has been set up 
 let setup = false;
 //set to true when the user get the answer correct
@@ -59,6 +56,8 @@ let lettersInWord = "";
 
 document.addEventListener("keyup", function(event){
 
+    document.querySelector(".begin-instructions").innerHTML = "";
+
     if(!setup){
         if(artist.length === 0){killScreen();}
         //randomly pick guess Word
@@ -69,9 +68,18 @@ document.addEventListener("keyup", function(event){
         output = set(gWord);
     }
     else if(setup){
-        guess = event.key;
+        if(letters.includes(event.key)){
+            guess = event.key;   
+        }
+        else{guess = "incorect input";}
+
+         
+        
         //find where guess is in gWord
-        if(!usedWords.includes(guess) && guess != " "){
+        if(guess === "incorect input"){
+            document.querySelector(".instructions").innerHTML = "You have entered an unacceptable character";
+        }
+        else if(!usedWords.includes(guess)){
             makeGuess(gWord, guess, output);
             if(guessRemaining === 0){
                 revealWord(gWord);
@@ -82,8 +90,7 @@ document.addEventListener("keyup", function(event){
                 endGame();
             }
         }
-        else if(usedWords.includes(guess)){document.querySelector(".instructions").innerHTML = "You have already guessed that letter";}
-        else{document.querySelector(".instructions").innerHTML = "You have entered an unacceptable character";}
+        else{document.querySelector(".instructions").innerHTML = "You have already guessed that letter";}
     }
 
 })    
